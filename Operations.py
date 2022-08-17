@@ -1,4 +1,6 @@
 import json
+
+
 class UserOperations:
 
 #-------------------------------------------------------------------------------------
@@ -19,7 +21,7 @@ class UserOperations:
 
     def mark_task_as_done(self, name):
         if self.list_all_tasks(name) == False:
-            print("No tasks entered, please enter a task first !")
+            print("No tasks entered, please enter a task first!")
             return
         task_number = int(input("Enter the task number to be marked as done : "))
         task_number -= 1
