@@ -13,3 +13,4 @@ class AllChoice:
             return int(choice)
         print("Invalid choice, try again")
         print("-----------------------------------------------------------------")
+        return int(self.get_users_choice())

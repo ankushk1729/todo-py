@@ -1,6 +1,4 @@
-from datetime import datetime
 import json
-import datetime
 class UserOperations:
 
 #-------------------------------------------------------------------------------------
@@ -20,7 +18,9 @@ class UserOperations:
 #------------------------------------------------------------------------------------- 
 
     def mark_task_as_done(self, name):
-        self.list_all_tasks(name)
+        if self.list_all_tasks(name) == False:
+            print("No tasks entered, please enter a task first !")
+            return
         task_number = int(input("Enter the task number to be marked as done : "))
         task_number -= 1
         file_cursor = open("user_data.json")
@@ -35,19 +35,21 @@ class UserOperations:
 #-------------------------------------------------------------------------------------
 
     def list_all_tasks(self, user_name):
-        file_cursor = open("user_data.json")
-        file_data = json.load(file_cursor)
+        with open("user_data.json") as file_cursor:
+            file_data = json.load(file_cursor)
+            if len(file_data[user_name]["tasks"])==0:
+                return False
 
-        cnt = 1
-        for i in file_data[user_name]["tasks"]:
-            print(cnt, end=") ")
-            cnt += 1
-            print(i["task_name"], end=" : ")
-            if i["Is_completed"] == True:
-                print("Completed")
-            else:
-                print("InComplete")
-        file_cursor.close()
+            cnt = 1
+            for i in file_data[user_name]["tasks"]:
+                print(cnt, end=") ")
+                cnt += 1
+                print(i["task_name"], end=" : ")
+                if i["Is_completed"] == True:
+                    print("Completed")
+                else:
+                    print("InComplete")
+        
 
 #-------------------------------------------------------------------------------------
 

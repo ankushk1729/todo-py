@@ -1,4 +1,5 @@
-import AllUsers
+import auth
+
 
 class MainClass:
 
@@ -8,12 +9,11 @@ class MainClass:
         print("Enter 2 to Sign In")
         print("Enter 0 to exit")
 
-        user_obj=AllUsers.User()
         entry_choice = input("Enter your choice : ")
         if entry_choice.isdigit() and  int(entry_choice) == 1:
-            user_obj.add_new_user()
+            auth.Auth.sign_up()
         elif entry_choice.isdigit() and  int(entry_choice) == 2:
-            user_obj.existing_user()
+            auth.Auth.login()
         elif entry_choice.isdigit() and  int(entry_choice) == 0:
             exit()
         else:
