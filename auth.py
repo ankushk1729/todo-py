@@ -5,13 +5,14 @@ import maskpass
 
 import choices
 import perform_op
+from constants import FILE_NAME
 
 
 class Auth:
     def login():
         name = input("Enter the user name, all smallcase : ")
         
-        with open("user_data.json") as file_cursor:
+        with open(FILE_NAME) as file_cursor:
             file_data = json.load(file_cursor)
 
         
@@ -20,7 +21,7 @@ class Auth:
             return False
 
         
-        with open("user_data.json") as file_cursor:
+        with open(FILE_NAME) as file_cursor:
             file_data = json.load(file_cursor)
         password=maskpass.advpass().encode('utf-8')
         tries = 2
@@ -42,7 +43,7 @@ class Auth:
 
 
     def sign_up():
-        with open("user_data.json") as file_cursor:
+        with open(FILE_NAME) as file_cursor:
             file_data = json.load(file_cursor)
         username = input("Enter the Username, all smallcase : ")
         username=username.lower()
@@ -61,5 +62,5 @@ class Auth:
         }
         
         file_data[username] = new_user_entry
-        with open("user_data.json", "w") as file_cursor:
+        with open(FILE_NAME, "w") as file_cursor:
             json.dump(file_data, file_cursor)

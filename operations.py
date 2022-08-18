@@ -1,5 +1,7 @@
 import json
 
+from constants import FILE_NAME
+
 
 class UserOperations:
 
@@ -10,11 +12,11 @@ class UserOperations:
                     "task_name": new_task,
                     "Is_completed": False
                    }
-        with open("user_data.json") as file_cursor:
+        with open(FILE_NAME) as file_cursor:
             file_data = json.load(file_cursor)
         file_data[name]["tasks"].append(new_dict)
         file_cursor.close()
-        with open("user_data.json", "w") as file_cursor:
+        with open(FILE_NAME, "w") as file_cursor:
             json.dump(file_data, file_cursor)
 
 #------------------------------------------------------------------------------------- 
@@ -25,19 +27,19 @@ class UserOperations:
             return
         task_number = int(input("Enter the task number to be marked as done : "))
         task_number -= 1
-        file_cursor = open("user_data.json")
+        file_cursor = open(FILE_NAME)
         file_data = json.load(file_cursor)
         while not (task_number in range(len(file_data[name]["tasks"]))):
             task_number = int(input("Invalid task number, try again.."))-1
         file_cursor.close()
         file_data[name]["tasks"][task_number]["Is_completed"] = True
-        with open("user_data.json", "w") as file_cursor:
+        with open(FILE_NAME, "w") as file_cursor:
             json.dump(file_data, file_cursor)
 
 #-------------------------------------------------------------------------------------
 
     def list_all_tasks(self, user_name):
-        with open("user_data.json") as file_cursor:
+        with open(FILE_NAME) as file_cursor:
             file_data = json.load(file_cursor)
             if len(file_data[user_name]["tasks"])==0:
                 return False
@@ -56,7 +58,7 @@ class UserOperations:
 #-------------------------------------------------------------------------------------
 
     def list_all_completed(self, name):
-        file_cursor = open("user_data.json")
+        file_cursor = open(FILE_NAME)
         file_data = json.load(file_cursor)
 
         cnt = 1
@@ -70,7 +72,7 @@ class UserOperations:
 #-------------------------------------------------------------------------------------
 
     def list_all_Incompleted(self, user_index):
-        file_cursor = open("user_data.json")
+        file_cursor = open(FILE_NAME)
         file_data = json.load(file_cursor)
 
         cnt = 1
