@@ -5,24 +5,19 @@ import maskpass
 
 import choices
 import perform_op
-from constants import USER_DATA_FILE
+from file_utils import get_file_data, write_to_file
 
 
 class Auth:
     def login():
         name = input("Enter the user name, all smallcase : ")
         
-        with open(USER_DATA_FILE) as file_cursor:
-            file_data = json.load(file_cursor)
-
+        file_data = get_file_data()
         
         if not name in file_data.keys():
             print("No such user found...!")
             return False
 
-        
-        with open(USER_DATA_FILE) as file_cursor:
-            file_data = json.load(file_cursor)
         password=maskpass.advpass().encode('utf-8')
         tries = 2
         while not bcrypt.checkpw(password, file_data[name]["password"].encode('utf-8')):
@@ -43,8 +38,7 @@ class Auth:
 
 
     def sign_up():
-        with open(USER_DATA_FILE) as file_cursor:
-            file_data = json.load(file_cursor)
+        file_data = get_file_data()
         username = input("Enter the Username, all smallcase : ")
         username=username.lower()
         while username in file_data.keys():
@@ -62,5 +56,4 @@ class Auth:
         }
         
         file_data[username] = new_user_entry
-        with open(USER_DATA_FILE, "w") as file_cursor:
-            json.dump(file_data, file_cursor)
+        write_to_file(file_data)

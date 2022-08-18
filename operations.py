@@ -1,5 +1,3 @@
-# Add utils file
-
 from file_utils import get_file_data, write_to_file
 
 
