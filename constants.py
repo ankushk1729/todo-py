@@ -1,1 +1,1 @@
-FILE_NAME = 'user_data.json'
+USER_DATA_FILE = 'user_data.json'

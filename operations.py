@@ -1,6 +1,6 @@
-import json
+# Add utils file
 
-from constants import FILE_NAME
+from file_utils import get_file_data, write_to_file
 
 
 class UserOperations:
@@ -12,12 +12,11 @@ class UserOperations:
                     "task_name": new_task,
                     "Is_completed": False
                    }
-        with open(FILE_NAME) as file_cursor:
-            file_data = json.load(file_cursor)
+        
+        file_data = get_file_data()
         file_data[name]["tasks"].append(new_dict)
-        file_cursor.close()
-        with open(FILE_NAME, "w") as file_cursor:
-            json.dump(file_data, file_cursor)
+
+        write_to_file(file_data)
 
 #------------------------------------------------------------------------------------- 
 
@@ -27,39 +26,35 @@ class UserOperations:
             return
         task_number = int(input("Enter the task number to be marked as done : "))
         task_number -= 1
-        file_cursor = open(FILE_NAME)
-        file_data = json.load(file_cursor)
+        file_data = get_file_data()
         while not (task_number in range(len(file_data[name]["tasks"]))):
             task_number = int(input("Invalid task number, try again.."))-1
-        file_cursor.close()
         file_data[name]["tasks"][task_number]["Is_completed"] = True
-        with open(FILE_NAME, "w") as file_cursor:
-            json.dump(file_data, file_cursor)
+        
+        write_to_file(file_data)
 
 #-------------------------------------------------------------------------------------
 
     def list_all_tasks(self, user_name):
-        with open(FILE_NAME) as file_cursor:
-            file_data = json.load(file_cursor)
-            if len(file_data[user_name]["tasks"])==0:
-                return False
+        file_data = get_file_data()
+        if len(file_data[user_name]["tasks"])==0:
+            return False
 
-            cnt = 1
-            for i in file_data[user_name]["tasks"]:
-                print(cnt, end=") ")
-                cnt += 1
-                print(i["task_name"], end=" : ")
-                if i["Is_completed"] == True:
-                    print("Completed")
-                else:
-                    print("InComplete")
-        
+        cnt = 1
+        for i in file_data[user_name]["tasks"]:
+            print(cnt, end=") ")
+            cnt += 1
+            print(i["task_name"], end=" : ")
+            if i["Is_completed"] == True:
+                print("Completed")
+            else:
+                print("InComplete")
+    
 
 #-------------------------------------------------------------------------------------
 
     def list_all_completed(self, name):
-        file_cursor = open(FILE_NAME)
-        file_data = json.load(file_cursor)
+        file_data = get_file_data()
 
         cnt = 1
         for i in file_data[name]["tasks"]:
@@ -67,13 +62,11 @@ class UserOperations:
                 print(cnt, end=") ")
                 cnt += 1
                 print(i["task_name"])
-        file_cursor.close()
 
 #-------------------------------------------------------------------------------------
 
     def list_all_Incompleted(self, user_index):
-        file_cursor = open(FILE_NAME)
-        file_data = json.load(file_cursor)
+        file_data = get_file_data()
 
         cnt = 1
         for i in file_data[user_index]["tasks"]:
@@ -81,7 +74,6 @@ class UserOperations:
                 print(cnt, end=") ")
                 cnt += 1
                 print(i["task_name"])
-        file_cursor.close()
 
 #-------------------------------------------------------------------------------------
 
