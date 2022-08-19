@@ -1,7 +1,7 @@
 import auth
 
 
-class MainClass:
+class Main:
 
     def main_entry_loop(self):
         print("===============================================================")
@@ -22,6 +22,6 @@ class MainClass:
 
 
 
-A = MainClass()
+A = Main()
 while True:
     A.main_entry_loop()

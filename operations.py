@@ -1,3 +1,4 @@
+from constants import NEW_LINE_SEPARATOR
 from file_utils import get_file_data, write_to_file
 
 
@@ -16,7 +17,7 @@ class UserOperations:
         file_data[name]["tasks"].append(new_dict)
 
         write_to_file(file_data)
-        print("\n**********************************************************\n")
+        print(NEW_LINE_SEPARATOR)
 
 #------------------------------------------------------------------------------------- 
 
@@ -34,7 +35,7 @@ class UserOperations:
         file_data[name]["tasks"][task_number]["Is_completed"] = True
         
         write_to_file(file_data)
-        print("\n**********************************************************\n")
+        print(NEW_LINE_SEPARATOR)
 
 #-------------------------------------------------------------------------------------
 
@@ -55,7 +56,7 @@ class UserOperations:
             else:
                 print("InComplete")
     
-        print("\n**********************************************************\n")
+        print(NEW_LINE_SEPARATOR)
 
 #-------------------------------------------------------------------------------------
 
@@ -70,7 +71,7 @@ class UserOperations:
                 print(cnt, end=") ")
                 cnt += 1
                 print(i["task_name"])
-        print("\n**********************************************************\n")
+        print(NEW_LINE_SEPARATOR)
 
 #-------------------------------------------------------------------------------------
 
@@ -86,7 +87,7 @@ class UserOperations:
                 cnt += 1
                 print(i["task_name"])
 
-        print("\n**********************************************************\n")
+        print(NEW_LINE_SEPARATOR)
 #-------------------------------------------------------------------------------------
 
     

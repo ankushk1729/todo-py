@@ -1,4 +1,4 @@
-class AllChoice:
+class Choice:
     def get_users_choice(self):
         print("Please enter the command number that you want to perform :")
         print("Enter 1 to add new task")

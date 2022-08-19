@@ -1,16 +1,14 @@
-import json
-
 import bcrypt
 import maskpass
 
-import choices
 import perform_op
+from choices import Choice
 from file_utils import get_file_data, write_to_file
 
 
 class Auth:
     def login():
-        name = input("Enter the user name, all smallcase : ")
+        name = input("Enter the user name : ")
         
         file_data = get_file_data()
         
@@ -22,16 +20,16 @@ class Auth:
         tries = 2
         while not bcrypt.checkpw(password, file_data[name]["password"].encode('utf-8')):
             if tries == 0:
-                print("Incorrect password, try again !!!")
+                print("Incorrect password, try again !")
                 return False
-            print(f'Invlaid password, {tries} left')
+            print(f'Invlaid password, {tries} tries left')
             tries -= 1
             password= maskpass.advpass().encode('utf-8')
 
         print("\nHello ", name, " : \n")
         
         while True:
-            user_command = choices.AllChoice().get_users_choice()
+            user_command = Choice().get_users_choice()
             if user_command==0:
                 return
             perform_op.Perform.operation_type(user_command, name)
