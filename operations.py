@@ -5,6 +5,7 @@ class UserOperations:
 
 #-------------------------------------------------------------------------------------
     def add_new_task(self, name):
+        print("\n*****************Add New Task*****************************\n")
         new_task = input("Enter the new task : ")
         new_dict = {
                     "task_name": new_task,
@@ -15,10 +16,13 @@ class UserOperations:
         file_data[name]["tasks"].append(new_dict)
 
         write_to_file(file_data)
+        print("\n**********************************************************\n")
 
 #------------------------------------------------------------------------------------- 
 
     def mark_task_as_done(self, name):
+        print("\n*******************Mark Task As Done**********************")
+                
         if self.list_all_tasks(name) == False:
             print("No tasks entered, please enter a task first!")
             return
@@ -30,10 +34,13 @@ class UserOperations:
         file_data[name]["tasks"][task_number]["Is_completed"] = True
         
         write_to_file(file_data)
+        print("\n**********************************************************\n")
 
 #-------------------------------------------------------------------------------------
 
     def list_all_tasks(self, user_name):
+        print("\n******************List of all Tasks***********************")
+                
         file_data = get_file_data()
         if len(file_data[user_name]["tasks"])==0:
             return False
@@ -48,10 +55,13 @@ class UserOperations:
             else:
                 print("InComplete")
     
+        print("\n**********************************************************\n")
 
 #-------------------------------------------------------------------------------------
 
     def list_all_completed(self, name):
+        print("\n*************List of all completed Tasks******************")
+                
         file_data = get_file_data()
 
         cnt = 1
@@ -60,10 +70,13 @@ class UserOperations:
                 print(cnt, end=") ")
                 cnt += 1
                 print(i["task_name"])
+        print("\n**********************************************************\n")
 
 #-------------------------------------------------------------------------------------
 
     def list_all_Incompleted(self, user_index):
+        print("\n***************List of all Incompleted Tasks**************")
+                
         file_data = get_file_data()
 
         cnt = 1
@@ -73,6 +86,7 @@ class UserOperations:
                 cnt += 1
                 print(i["task_name"])
 
+        print("\n**********************************************************\n")
 #-------------------------------------------------------------------------------------
 
     
