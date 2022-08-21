@@ -4,6 +4,7 @@ import maskpass
 import perform_op
 from choices import Choice
 from file_utils import get_file_data, write_to_file
+from operations import UserOperations
 
 
 class Auth:
@@ -28,6 +29,9 @@ class Auth:
 
         print("\nHello ", name, " : \n")
         
+        user_op = UserOperations()
+        user_op.show_unfinished_tasks(name)
+
         while True:
             user_command = Choice().get_users_choice()
             if user_command==0:

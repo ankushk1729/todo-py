@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from constants import NEW_LINE_SEPARATOR
 from file_utils import get_file_data, write_to_file
 
@@ -8,9 +10,11 @@ class UserOperations:
     def add_new_task(self, name):
         print("\n*****************Add New Task*****************************\n")
         new_task = input("Enter the new task : ")
+        deadline = input("Please enter the task deadline in format DD/MM/YY HH:MM")
         new_dict = {
                     "task_name": new_task,
-                    "Is_completed": False
+                    "Is_completed": False,
+                    "deadline":deadline
                    }
         
         file_data = get_file_data()
@@ -75,13 +79,13 @@ class UserOperations:
 
 #-------------------------------------------------------------------------------------
 
-    def list_all_Incompleted(self, user_index):
+    def list_all_Incompleted(self, user_name):
         print("\n***************List of all Incompleted Tasks**************")
                 
         file_data = get_file_data()
 
         cnt = 1
-        for i in file_data[user_index]["tasks"]:
+        for i in file_data[user_name]["tasks"]:
             if i["Is_completed"] == False:
                 print(cnt, end=") ")
                 cnt += 1
@@ -90,4 +94,17 @@ class UserOperations:
         print(NEW_LINE_SEPARATOR)
 #-------------------------------------------------------------------------------------
 
-    
+    def show_unfinished_tasks(self, user_name):
+        print("\n***************List of all unfinished Tasks**************")
+
+        file_data = get_file_data()
+        format_data = "%d/%m/%y %H:%M"
+        cnt = 1
+        for i in file_data[user_name]["tasks"]:
+            current_date = datetime.now()
+            if datetime.strptime(i["deadline"], format_data) < current_date and i["Is_completed"] == False: 
+                print(cnt, end=") ")
+                cnt += 1
+                print(i["task_name"])
+
+        print(NEW_LINE_SEPARATOR)
