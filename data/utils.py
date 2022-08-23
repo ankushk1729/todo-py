@@ -1,6 +1,6 @@
 import json
 
-from constants import USER_DATA_FILE
+from config.constants import USER_DATA_FILE
 
 
 def get_file_data():
@@ -12,3 +12,4 @@ def get_file_data():
 def write_to_file(file_data):
     with open(USER_DATA_FILE, "w") as file_cursor:
         json.dump(file_data, file_cursor)
+

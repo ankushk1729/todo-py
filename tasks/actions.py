@@ -1,7 +1,7 @@
 from datetime import datetime
 
-from constants import NEW_LINE_SEPARATOR
-from file_utils import get_file_data, write_to_file
+from config.constants import NEW_LINE_SEPARATOR
+from data.utils import get_file_data, write_to_file
 
 
 class UserOperations:
@@ -10,7 +10,7 @@ class UserOperations:
     def add_new_task(self, name):
         print("\n*****************Add New Task*****************************\n")
         new_task = input("Enter the new task : ")
-        deadline = input("Please enter the task deadline in format DD/MM/YY HH:MM")
+        deadline = input("Please enter the task deadline in format DD/MM/YY HH:MM ")
         new_dict = {
                     "task_name": new_task,
                     "Is_completed": False,

@@ -1,9 +1,9 @@
-import operations
+import tasks.actions as actions
 
 
 class Perform:
     def operation_type(user_command, name):
-        all_operations = operations.UserOperations()
+        all_operations = actions.UserOperations()
         
         match user_command:
             case 1:

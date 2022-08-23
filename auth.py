@@ -1,10 +1,10 @@
 import bcrypt
 import maskpass
 
-import perform_op
-from choices import Choice
-from file_utils import get_file_data, write_to_file
-from operations import UserOperations
+from data.utils import get_file_data, write_to_file
+from tasks.actions import UserOperations
+from tasks.choices import Choice
+from tasks.controller import Perform
 
 
 class Auth:
@@ -23,7 +23,7 @@ class Auth:
             if tries == 0:
                 print("Incorrect password, try again !")
                 return False
-            print(f'Invlaid password, {tries} tries left')
+            print(f'Invalid password, {tries} tries left')
             tries -= 1
             password= maskpass.advpass().encode('utf-8')
 
@@ -36,7 +36,7 @@ class Auth:
             user_command = Choice().get_users_choice()
             if user_command==0:
                 return
-            perform_op.Perform.operation_type(user_command, name)
+            Perform.operation_type(user_command, name)
 
 
     def sign_up():
